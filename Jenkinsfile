@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('git repo & clean') {
             steps {
-               bat "rmdir  /s /q KienMallServiceJunitTesting"
+               // bat "rmdir  /s /q KienMallServiceJunitTesting"
                 bat "git clone https://github.com/kienprocoder/kien_mall_service.git"
                 bat "mvn clean -f KienMallServiceJunitTesting"
             }

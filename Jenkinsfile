@@ -1,27 +1,32 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('git repo & clean') {
             steps {
-                echo 'Build App'
+               bat "rmdir  /s /q KienMallServiceJunitTesting"
+                bat "git clone https://github.com/kienprocoder/kien_mall_service.git"
+                bat "mvn clean -f KienMallServiceJunitTesting"
             }
         }
-        stage('Test'){
+        stage('Install') {
             steps {
-                echo 'Test App'
+                bat "mvn install -f KienMallServiceJunitTesting"
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploy App'
+                bat "mvn deploy -f KienMallServiceJunitTesting"
             }
         }
-    }
-
-    post {
-        always {
-            emailext body: 'Summary', subject: 'Pipeline Status', to: 'nxkien04hd@gmail.com'
+        stage('Test') {
+            steps {
+                bat "mvn test -f KienMallServiceJunitTesting"
+            }
+        }
+        stage('Package') {
+            steps {
+                bat "mvn package -f KienMallServiceJunitTesting"
+            }
         }
     }
 }

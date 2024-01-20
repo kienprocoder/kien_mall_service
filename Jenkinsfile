@@ -8,22 +8,22 @@ pipeline {
                 bat "mvn clean -f kien_mall_service"
             }
         }
-        stage('Install') {
+        stage('install') {
             steps {
                 bat "mvn install -f kien_mall_service"
             }
         }
-        stage('Deploy') {
+        stage('deploy') {
             steps {
                 bat "mvn deploy -f kien_mall_service"
             }
         }
-        stage('Test') {
+        stage('test') {
             steps {
                 bat "mvn test -f kien_mall_service"
             }
         }
-        stage('Package') {
+        stage('package') {
             steps {
                 bat "mvn package -f kien_mall_service"
             }

@@ -24,6 +24,13 @@ public class ProductUploadImageController {
     @Autowired
     private ProductImagesService fileDataService;
 
+    /**
+     * upload image product
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/file-upload-to-directory")
     public ResponseEntity<?> uploadImageToFileDirectory(@RequestParam("file") MultipartFile file) throws IOException {
         String uploadFile = fileDataService.uploadFileToFileDirectory(file);
@@ -37,11 +44,16 @@ public class ProductUploadImageController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(ResponseStatus.INTERNAL_SERVER_ERROR, "Upload " + uploadFile + " error"));
     }
 
+    /**
+     * download image png
+     *
+     * @param fileName
+     * @return
+     * @throws IOException
+     */
     @GetMapping("/file-download-from-directory/{fileName}")
     public ResponseEntity<?> downloadImageFromFileDirectory(@PathVariable String fileName) throws IOException{
         byte[] downloadFile = fileDataService.downloadFileFromFileDirectory(fileName);
-
-
 
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))

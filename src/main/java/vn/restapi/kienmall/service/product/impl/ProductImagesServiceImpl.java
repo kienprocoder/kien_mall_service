@@ -17,7 +17,7 @@ public class ProductImagesServiceImpl implements ProductImagesService {
     @Autowired
     private UploadImagesRepository uploadImagesRepository;
 
-    private final String FILE_PATH = "C:\\home\\product\\uploads\\";
+    private final String FILE_PATH = "g_image.redirect";
 
     /**
      * @param file
@@ -37,7 +37,7 @@ public class ProductImagesServiceImpl implements ProductImagesService {
         file.transferTo(new java.io.File(filePath));
 
         if(fileData!= null) {
-            return "file uploaded successfully : "+file.getOriginalFilename()+ " and Files uploaded path is :"+filePath;
+            return file.getOriginalFilename();
         }
         return null;
     }

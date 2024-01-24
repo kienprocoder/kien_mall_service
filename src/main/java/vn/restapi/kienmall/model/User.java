@@ -24,6 +24,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private Long departmentId;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_roles",
